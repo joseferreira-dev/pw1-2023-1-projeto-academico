@@ -63,6 +63,9 @@ app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.set('views', path.resolve(__dirname, 'src', 'views'));
 app.set('view engine', 'ejs');
 
+// Adicionando api
+app.use(api);
+
 // Adicionando o csrf
 app.use(csrf());
 
@@ -71,7 +74,6 @@ app.use(middlewareGlobal);
 app.use(checkCsrfError);
 app.use(csrfMiddleware);
 app.use(routes);
-app.use(api);
 
 app.on('pronto', () => {
   app.listen(3000, () => {

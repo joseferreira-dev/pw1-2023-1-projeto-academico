@@ -79,4 +79,4 @@ class Login { // Criando classe para o modelo login
   }
 }
 
-module.exports = Login;
+module.exports = { Login, LoginModel };

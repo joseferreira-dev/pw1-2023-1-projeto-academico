@@ -1,4 +1,4 @@
-const Login = require('../models/LoginModel'); // Importando o modelo de login
+const { Login } = require('../models/LoginModel'); // Importando o modelo de login
 
 exports.index = (req, res) => { // Exibe a página de login
   if(req.session.user) return res.render('login-logado'); // Se exirtir um usuário da seção a página exibida não terá os formulários

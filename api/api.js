@@ -1,9 +1,58 @@
 const express = require('express');
 const api = express.Router();
+const jwt = require('jsonwebtoken');
 
-const { TurmaModel } = require('../src/models/TurmaModel')
-const { ProfessorModel } = require('../src/models/ProfessorModel')
-const { AlunoModel } = require('../src/models/AlunoModel')
+const { TurmaModel } = require('../src/models/TurmaModel');
+const { ProfessorModel } = require('../src/models/ProfessorModel');
+const { AlunoModel } = require('../src/models/AlunoModel');
+const { Login } = require('../src/models/LoginModel');
+
+const verificarToken = async (req, res, next) => {
+  const authorization = req.get('authorization');
+
+  if (authorization) {
+    try {
+      const [, token] = authorization.split(' ');
+      await jwt.verify(token, process.env.SECRET_KEY);
+
+      return next();
+    } catch (e) {
+      return res.status(401).json({ error: 'Invalid token.' });
+    }
+  } else {
+    res.status(401).json({ error: 'Authorization header is empty.' });
+  }
+}
+
+api.post('/api/v1/register', async (req, res) => {
+  try {
+    const login = new Login(req.body); // Criando uma instância de Login
+    await login.register(); // Chamando o método register() da classe Login para realizar o cadastro
+
+    res.status(200).json({ message: 'Registro realizado com sucesso.' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Ocorreu um erro no servidor.' });
+  }
+});
+
+api.post('/api/v1/login', async (req, res) => {
+  try {
+    // Verificar se o usuário e a senha estão corretos
+    const login = new Login(req.body);
+    await login.login();
+
+    const token = jwt.sign({ username: login.user.username }, process.env.SECRET_KEY, { expiresIn: 3600 });
+
+    const tokenBearer = `Bearer ${token}`;
+
+    res.set('Authorization', tokenBearer);
+    res.json({ token });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: 'Ocorreu um erro no servidor.' });
+  }
+});
 
 /**
  * @swagger
