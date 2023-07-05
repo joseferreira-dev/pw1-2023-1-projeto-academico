@@ -1,0 +1,46 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Aluno</h1>
+      <p class="text-center lead">Crie ou edite o aluno abaixo.</p>
+
+      <%- include('includes/messages') %>
+
+      <% if(aluno._id) { %>
+      <form action="/aluno/edit/<%= aluno._id %>" method="POST">
+      <% } else { %>
+      <form action="/aluno/register" method="POST">
+      <% } %>
+        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+        <div class="form-group">
+          <label>Matrícula</label>
+          <input value="<%= aluno.matricula %>" type="text" class="form-control" name="matricula">
+        </div>
+        <div class="form-group">
+          <label>Nome</label>
+          <input value="<%= aluno.nome %>" type="text" class="form-control" name="nome">
+        </div>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input value="<%= aluno.email %>" type="email" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+          <label>Telefone</label>
+          <input value="<%= aluno.telefone %>" type="telefone" class="form-control" name="telefone">
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </form>
+
+
+    </div>
+    
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>

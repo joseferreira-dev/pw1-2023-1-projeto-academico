@@ -1,0 +1,28 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Cadastro de Pessoas</h1>
+      <p class="text-center lead">Realize o cadastro de professores e alunos</p>
+
+      <%- include('includes/messages') %>
+
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-primary" href="/aluno/index">Cadastrar Aluno</a>
+      </div>
+      <br/>
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-primary" href="/professor/index">Cadastrar Professor</a>
+      </div>
+
+    </div>
+    
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>

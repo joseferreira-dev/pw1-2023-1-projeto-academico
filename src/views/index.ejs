@@ -1,0 +1,37 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Academify</h1>
+      <p class="text-center lead">Turmas cadastradas</p>
+
+      <%- include('includes/messages') %>
+
+      <% if(turmas.length > 0) { %>
+      <div class="responsive-table">
+        <table class="table my-3">
+          <% turmas.forEach(turma => { %>
+          <tr>
+            <td><a href="/turma/exibir/<%= turma._id %>"><%= turma.rotulo %></a></td>
+            <td><%= turma.periodo %></td>
+            <td><a href="/turma/index/<%= turma._id %>">Editar</a></td>
+            <td><a class="text-danger" href="/turma/delete/<%= turma._id %>">Excluir</a></td>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+      <% } else { %>
+        <p class="text-center lead">Não existem turmas cadastradas.</p>
+      <% } %>
+
+    </div>
+    
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>

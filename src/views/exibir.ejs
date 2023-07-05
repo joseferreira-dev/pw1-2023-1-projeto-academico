@@ -1,0 +1,34 @@
+<%- include('includes/head') %>
+<%- include('includes/nav') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="text-center">Turma <%= turma.rotulo %></h1>
+      <p class="text-center">Professor Responsável: <%= professor %></p>
+      <hr/>
+      <br/>
+      <h3 class="text-center lead">Alunos matriculados</h3>
+
+      <% if(turma.alunos) { %>
+      <div class="responsive-table">
+        <table class="table my-3">
+          <% turma.alunos.forEach(aluno => { %>
+          <tr>
+            <td><%= aluno %></td>
+          </tr>
+          <% }); %>
+        </table>
+      </div>
+      <% } else { %>
+        <p class="text-center lead">Não existem alunos matriculados.</p>
+      <% } %>
+    </div>
+    
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer') %>
