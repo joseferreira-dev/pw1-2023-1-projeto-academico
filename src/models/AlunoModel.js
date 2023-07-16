@@ -83,8 +83,8 @@ Aluno.buscaPorId = async function (id) { // Realiza a busca de um aluno pelo id
 };
 
 Aluno.buscaAlunos = async function () { // Método para buscar e listar todos os alunos
-    const alunos = await AlunoModel.find()
-        .sort({ nome: 1 }); // Busca e lista todos os alunos pelo nome
+    const alunos = await AlunoModel.find();
+    //alunos.sort({ nome: 1 }); // Busca e lista todos os alunos pelo nome
     return alunos;
 };
 

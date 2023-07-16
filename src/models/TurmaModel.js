@@ -74,7 +74,7 @@ Turma.buscaPorId = async function(id) { // Realiza a busca de uma turma pelo id
 
 Turma.buscaTurmas = async function() { // Método para buscar e listar todas as turmas
   const turmas = await TurmaModel.find() 
-    .sort({ periodo: -1 }); // Busca e lista todas as turmas pelo periodo
+    //.sort({ periodo: -1 }); // Busca e lista todas as turmas pelo periodo
   return turmas;
 };
 
